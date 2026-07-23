@@ -1,0 +1,22 @@
+{
+  "name": "fairmind-coding",
+  "description": "Coding workflow plugin: 6 role-based agents (Technical Lead, Software Engineer, Code Reviewer, QA Engineer, Debugging Specialist, Security Engineer), 11 skills (frontend/backend/AI + gate layer), 8 hooks (6 workspace + 2 ambient insight-capture), and 17 commands (loop, develop, gate authoring, harness audit, insights sync, fix/migrate/PR helpers). Adds a loop mode: a machine-checkable stop condition with an executed gate, RED-first maker-not-checker authoring, admission, and a final human gate. Runs standalone on any repo (zero-config); Fairmind, Playwright and MongoDB MCP are optional and only enable connected mode.",
+  "version": "0.2.46",
+  "author": {
+    "name": "Fairmind"
+  },
+  "repository": "https://github.com/FairMind-Gen-AI-Studio/claude-plugins",
+  "license": "MIT",
+  "keywords": [
+    "fairmind",
+    "agents",
+    "skills",
+    "tdd",
+    "code-review",
+    "playwright",
+    "sonarqube",
+    "k8s",
+    "loop",
+    "gate"
+  ]
+}

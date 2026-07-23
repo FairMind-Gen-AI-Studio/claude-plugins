@@ -1,0 +1,27 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "fairmind-plugins",
+  "description": "Fairmind plugins marketplace for Claude Code. Ships fairmind-design (design and accessibility toolkit) and fairmind-coding (Fairmind coding workflow with role-based agents, technology skills, and journal-enforcement hooks).",
+  "owner": {
+    "name": "Fairmind"
+  },
+  "metadata": {
+    "version": "0.2.50"
+  },
+  "plugins": [
+    {
+      "name": "fairmind-design",
+      "description": "Ten design and accessibility subagents (design verification, token analyzer, Code Connect generator, WCAG/contrast/keyboard/screen-reader auditors, composition reviewer, CLAUDE.md compliance checker), four orchestration commands, and four reference skills. Requires Figma and Playwright MCP servers.",
+      "category": "design",
+      "source": "./plugins/fairmind-design",
+      "strict": false
+    },
+    {
+      "name": "fairmind-coding",
+      "description": "Fairmind coding workflow: 6 role-based agents (Technical Lead, Software Engineer, Code Reviewer, QA Engineer, Debugging Specialist, Security Engineer), 11 skills (frontend/backend/AI + gate layer), 8 hooks (6 workspace tied to .fairmind/active-context.json + 2 ambient insight-capture), and 17 commands (fairmind-loop, fairmind-develop, loop-import, fairmind-add-check, harness-audit, fairmind-sync-insights, fix-issue, fix-frontend-issue, sonarqube-fix, migrate-to-k8s, report, make-tests, de-slop, gh-* helpers). Includes a loop mode with an executed, machine-checkable gate. Runs standalone on any repo; Fairmind, Playwright, and MongoDB MCP are optional (connected mode).",
+      "category": "development",
+      "source": "./plugins/fairmind-coding",
+      "strict": false
+    }
+  ]
+}

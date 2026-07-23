@@ -1,0 +1,19 @@
+{
+  "name": "fairmind-design",
+  "description": "Design and accessibility toolkit: 10 specialized subagents, 4 orchestration commands, 4 reference skills. Verifies design-to-code parity with Figma, enforces semantic design tokens, generates Code Connect mappings, and runs full WCAG 2.1 AA accessibility audits.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Fairmind"
+  },
+  "repository": "https://github.com/FairMind-Gen-AI-Studio/claude-plugins",
+  "license": "MIT",
+  "keywords": [
+    "design",
+    "accessibility",
+    "figma",
+    "design-system",
+    "wcag",
+    "design-tokens",
+    "code-connect"
+  ]
+}

@@ -1,0 +1,85 @@
+# CLAUDE.md
+
+Project-level instructions for Claude Code. Copy this file to the project root, replace `<...>` placeholders, and tune the rules to your codebase.
+
+## Project
+
+- Name: `<project name>`
+- Description: `<one line>`
+- Stack: `<React + TypeScript + Tailwind + ...>`
+- Design system reference: `DESIGN.md`
+- Token files: `styles/primitives.css`, `styles/semantic.css`
+
+## Available Agents
+
+This project uses the `fairmind-design` plugin. Available agents:
+
+- `fairmind-design-verification` — design-to-code parity check against Figma
+- `fairmind-token-analyzer` — semantic token usage and drift detection
+- `fairmind-component-composition-reviewer` — composite-component structure review
+- `fairmind-figma-code-connect-generator` — Figma Code Connect maintenance
+- `fairmind-accessibility-orchestrator` — full a11y audit (orchestrator)
+- `fairmind-wcag-compliance-auditor` — WCAG 2.1 AA conformance
+- `fairmind-color-contrast-specialist` — contrast against WCAG 1.4.3 / 1.4.11
+- `fairmind-keyboard-navigation-tester` — keyboard operability
+- `fairmind-screen-reader-tester` — screen reader comprehension
+- `fairmind-claude-md-compliance-checker` — CLAUDE.md conformance (mandatory closing step)
+
+## Available Commands
+
+- `/design-verify <component-path> <figma-url>` — full design quality gate
+- `/a11y-audit <component-path-or-url>` — full accessibility audit
+- `/code-connect <component-path> <figma-url>` — Code Connect generation/update
+- `/design-task-close` — mandatory closing compliance check
+
+## Quality Gates
+
+| Change kind | Mandatory agents |
+|---|---|
+| New or modified component | `fairmind-design-verification`, `fairmind-token-analyzer`, `fairmind-component-composition-reviewer` |
+| Component touching color | + `fairmind-color-contrast-specialist` |
+| Component with interactivity | + `fairmind-keyboard-navigation-tester`, `fairmind-screen-reader-tester` |
+| Page-level change | `fairmind-accessibility-orchestrator` |
+| Any task close | `fairmind-claude-md-compliance-checker` (always) |
+
+## Cannot Proceed If
+
+- Any mandatory agent returned `FAIL` and was not re-run after a fix
+- Any hardcoded hex color exists in code outside `styles/primitives.css`
+- Any interactive element lacks an accessible name
+- Any focusable element lacks a visible focus indicator
+- Build, lint, or tests fail
+- `fairmind-claude-md-compliance-checker` returned `BLOCKED`
+
+## If An Agent Fails
+
+1. Read the agent's report.
+2. Apply the recommended fixes in the affected files.
+3. Re-run the failing agent on the fixed files.
+4. Continue only when the agent returns `PASS`.
+
+## Anti-patterns (auto-grep)
+
+The compliance checker will fail the task if any of the following appear in modified files:
+
+- Inline hex colors: regex `#[0-9a-fA-F]{3,8}` (outside `styles/primitives.css`)
+- Tailwind arbitrary values: `text-\[`, `bg-\[`, `p-\[`, `m-\[`
+- `<div ... onClick`
+- `<a href="#"`
+- `outline:\s*none` without a paired `:focus-visible` rule
+
+## Build, Lint, Test
+
+- Build: `<npm run build>`
+- Lint: `<npm run lint>`
+- Type check: `<npm run typecheck>`
+- Test: `<npm test>`
+- Storybook (if used): `<npm run storybook>`
+
+A task is not complete until all four commands above exit `0`.
+
+## Design System
+
+- Token policy: components reference semantic tokens only. See the `design-token-conventions` skill in `fairmind-design`.
+- New semantic tokens require a DS proposal documented in `DESIGN.md`.
+- Sub-folder rules: see `styles/CLAUDE.md` and `src/components/CLAUDE.md` (create as needed).
